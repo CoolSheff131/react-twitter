@@ -1,4 +1,4 @@
-import { Avatar, Container, Grid, IconButton, InputBase, Paper, TextField, Theme, Typography } from '@material-ui/core'
+import { Container, Grid, IconButton, InputBase, Paper, Theme, Typography } from '@material-ui/core'
 import React from 'react'
 
 import TwitterIcon from '@material-ui/icons/Twitter'
