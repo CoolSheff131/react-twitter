@@ -1,13 +1,17 @@
-import { Button, makeStyles, Typography } from '@material-ui/core'
+import { Button, FormControl, makeStyles, Typography } from '@material-ui/core'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import SearchIcon from '@material-ui/icons/Search'
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline'
 import ModeCommentOutlined from '@material-ui/icons/ModeCommentOutlined'
 import React from 'react'
-import { MessageOutlined } from '@material-ui/icons'
+import ModalBlock from '../components/ModalBlock'
+import FormGroup from '@material-ui/core/FormGroup'
+import TextField from '@material-ui/core/TextField'
 
 
-const useStyle = makeStyles((theme) => ({
+
+
+export const useStyleSignIn = makeStyles((theme) => ({
     wrapper: {
         display: 'flex',
         height: 'calc(100vh - 84px)',
@@ -68,6 +72,9 @@ const useStyle = makeStyles((theme) => ({
         fontSize: 32,
         marginBottom: 45,
         marginTop: 20,
+    },
+    loginSideField: {
+        marginBottom: 18
     }
 
     // button: {
@@ -80,7 +87,14 @@ const useStyle = makeStyles((theme) => ({
 }))
 
 function SignIn() {
-    const classes = useStyle();
+    const classes = useStyleSignIn();
+    const [visibleSignIn, setVisibleSignIn] = React.useState(false)
+    const handleClickOpen = () => {
+        setVisibleSignIn(true)
+    }
+    const handleClose = () => {
+        setVisibleSignIn(false)
+    }
 
     return (
         <div className={classes.wrapper}>
@@ -99,7 +113,38 @@ function SignIn() {
                     <Typography><b>Присоединяйтесь к Твиттеру прямо сейчас!</b></Typography>
                     <br></br>
                     <Button style={{ marginBottom: 20 }} variant='contained' color="primary" fullWidth>Зарегестрироваться</Button>
-                    <Button variant='outlined' color="primary" fullWidth>Войти</Button>
+                    <Button onClick={handleClickOpen} variant='outlined' color="primary" fullWidth>Войти</Button>
+                    <ModalBlock visible={visibleSignIn} onClose={handleClose} title="Войти в аккаунт" classes={classes}>
+                        <FormControl component="fieldset" fullWidth>
+                            <FormGroup aria-label="position" row>
+                                <TextField autoFocus
+                                    className={classes.loginSideField}
+                                    margin='dense'
+                                    id='email'
+                                    label="Email Address"
+                                    InputLabelProps={{ shrink: true }}
+                                    variant="filled"
+                                    type="email"
+                                    fullWidth />
+                                <TextField autoFocus
+                                    className={classes.loginSideField}
+                                    margin='dense'
+                                    id='password'
+                                    label="Пароль"
+                                    InputLabelProps={{ shrink: true }}
+                                    variant="filled"
+                                    type="password"
+                                    fullWidth />
+                                <Button onClick={handleClose} variant='contained' color="primary" fullWidth>
+                                    Войти
+                                </Button>
+                                <br />
+                                <br />
+                                <br />
+                            </FormGroup>
+                        </FormControl>
+                    </ModalBlock>
+
                 </div>
             </section>
         </div>
