@@ -1,4 +1,4 @@
-import { Container, Grid, IconButton, Typography } from '@material-ui/core'
+import { Container, Grid, IconButton, InputBase, Paper, TextField, Typography } from '@material-ui/core'
 import React from 'react'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import SearchIcon from '@material-ui/icons/Search'
@@ -7,7 +7,7 @@ import MessageIcon from '@material-ui/icons/EmailOutlined'
 import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined'
 import ListIcon from '@material-ui/icons/ListAltOutlined'
 import UserIcon from '@material-ui/icons/PermIdentityOutlined'
-import { makeStyles } from '@material-ui/styles'
+import { createStyles, makeStyles, withStyles } from '@material-ui/styles'
 
 const useHomeStyles = makeStyles(() => ({
     wrapper: {
@@ -35,8 +35,35 @@ const useHomeStyles = makeStyles(() => ({
     },
     sideMenuListItemIcon: {
         fontSize: 28,
+    },
+    tweetsWrapper: {
+        borderRadius: 0,
+        height: '100%',
+        borderTop: 0,
+        borderBottom: 0,
+    },
+    tweetsHeader: {
+        borderTop: 0,
+        borderLeft: 0,
+        borderRight: 0,
+        padding: '10px 15px',
+        '& h6': {
+            fontWeight: 800,
+        }
     }
 }))
+
+const SearchTextField = withStyles(() =>
+    createStyles({
+        input: {
+            borderRadius: 30,
+            backgroundColor: '#e6ecf0',
+            height: 45,
+            padding: 0,
+        }
+    }
+    )
+)(InputBase)
 
 export const Home = () => {
     const classes = useHomeStyles();
@@ -88,8 +115,16 @@ export const Home = () => {
                         </li>
                     </ul>
                 </Grid>
-                <Grid item xs={6}></Grid>
-                <Grid item xs={3}></Grid>
+                <Grid item xs={6}>
+                    <Paper className={classes.tweetsWrapper} variant='outlined'>
+                        <Paper className={classes.tweetsHeader} variant='outlined'>
+                            <Typography variant='h6'>Главная</Typography>
+                        </Paper>
+                    </Paper>
+                </Grid>
+                <Grid item xs={3}>
+                    <SearchTextField placeholder="Поиск в Твиттере" fullWidth />
+                </Grid>
             </Grid>
         </Container>
     )
