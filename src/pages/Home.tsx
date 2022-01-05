@@ -1,16 +1,11 @@
 import { Container, Grid, IconButton, InputBase, Paper, Theme, Typography } from '@material-ui/core'
 import React from 'react'
 
-import TwitterIcon from '@material-ui/icons/Twitter'
-import SearchIcon from '@material-ui/icons/Search'
-import NotificationIcon from '@material-ui/icons/NotificationsNoneOutlined'
-import MessageIcon from '@material-ui/icons/EmailOutlined'
-import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined'
-import ListIcon from '@material-ui/icons/ListAltOutlined'
-import UserIcon from '@material-ui/icons/PermIdentityOutlined'
+
 import { createStyles, makeStyles, withStyles } from '@material-ui/styles'
 import { grey } from '@material-ui/core/colors'
 import { Tweet } from '../components/Tweet'
+import { SideMenu } from '../components/SideMenu'
 
 export const useHomeStyles = makeStyles((theme: Theme) => ({
     wrapper: {
@@ -26,10 +21,35 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
         listStyle: 'none',
         padding: 0,
         margin: 0,
+        width: 230,
     },
     sideMenuListItem: {
-        display: 'flex',
-        alignItems: 'center'
+        '&:hover': {
+            '& div': {
+                backgroundColor: 'rgba(29,161,242,0.1 )',
+                '& h6': {
+                    color: theme.palette.primary.main
+                },
+                '& svg path': {
+                    fill: theme.palette.primary.main
+                },
+            }
+        },
+        '& div': {
+            display: 'inline-flex',
+            alignItems: 'center',
+
+            padding: '0 25px 0 20px',
+            marginBottom: 15,
+            borderRadius: 30,
+            height: 50,
+            cursor: 'pointer',
+            transition: 'background-color 0.1s ease-in-out'
+        }
+    },
+    sideMenuTweetButton: {
+        padding: theme.spacing(2),
+        marginTop: theme.spacing(3)
     },
     sideMenuListItemLabel: {
         fontWeight: 700,
@@ -37,7 +57,7 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
         marginLeft: 15,
     },
     sideMenuListItemIcon: {
-        fontSize: 28,
+        fontSize: 32,
     },
     tweet: {
         cursor: 'pointer',
@@ -94,49 +114,7 @@ export const Home = () => {
         <Container className={classes.wrapper} maxWidth="lg">
             <Grid container spacing={3}>
                 <Grid item xs={3}>
-                    <ul className={classes.sideMenuList}>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton className={classes.logo} aria-label="delete" color="primary">
-                                <TwitterIcon color="primary" className={classes.logoIcon} />
-                            </IconButton>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton aria-label="delete" >
-                                <SearchIcon className={classes.sideMenuListItemIcon} />
-                            </IconButton>
-                            <Typography variant="h6" className={classes.sideMenuListItemLabel} >Поиск</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton aria-label="delete" >
-                                <NotificationIcon className={classes.sideMenuListItemIcon} />
-                            </IconButton>
-                            <Typography variant="h6" className={classes.sideMenuListItemLabel} >Уведомления</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton aria-label="delete" >
-                                <MessageIcon className={classes.sideMenuListItemIcon} />
-                            </IconButton>
-                            <Typography variant="h6" className={classes.sideMenuListItemLabel}>Сообщения</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton aria-label="delete" >
-                                <BookmarkIcon className={classes.sideMenuListItemIcon} />
-                            </IconButton>
-                            <Typography variant="h6" className={classes.sideMenuListItemLabel}>Закладки</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton aria-label="delete" >
-                                <ListIcon className={classes.sideMenuListItemIcon} />
-                            </IconButton>
-                            <Typography variant="h6" className={classes.sideMenuListItemLabel}>Список</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton aria-label="delete" >
-                                <UserIcon className={classes.sideMenuListItemIcon} />
-                            </IconButton>
-                            <Typography variant="h6" className={classes.sideMenuListItemLabel}>Профиль</Typography>
-                        </li>
-                    </ul>
+                    <SideMenu classes={classes} />
                 </Grid>
                 <Grid item xs={6}>
                     <Paper className={classes.tweetsWrapper} variant='outlined'>
