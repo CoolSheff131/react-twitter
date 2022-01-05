@@ -1,4 +1,4 @@
-import { Container, Grid, IconButton, InputBase, Paper, TextField, Typography } from '@material-ui/core'
+import { Avatar, Container, Grid, IconButton, InputBase, Paper, TextField, Typography } from '@material-ui/core'
 import React from 'react'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import SearchIcon from '@material-ui/icons/Search'
@@ -7,7 +7,12 @@ import MessageIcon from '@material-ui/icons/EmailOutlined'
 import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined'
 import ListIcon from '@material-ui/icons/ListAltOutlined'
 import UserIcon from '@material-ui/icons/PermIdentityOutlined'
+import CommentIcon from '@material-ui/icons/ChatBubbleOutlineOutlined'
+import RepostIcon from '@material-ui/icons/RepeatOutlined'
+import LikeIcon from '@material-ui/icons/FavoriteBorderOutlined'
+import ShareIcon from '@material-ui/icons/ReplyOutlined'
 import { createStyles, makeStyles, withStyles } from '@material-ui/styles'
+import { grey } from '@material-ui/core/colors'
 
 const useHomeStyles = makeStyles(() => ({
     wrapper: {
@@ -50,6 +55,14 @@ const useHomeStyles = makeStyles(() => ({
         '& h6': {
             fontWeight: 800,
         }
+    },
+    tweetFooter: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: 450,
+    },
+    tweetsUserName: {
+        color: grey[500]
     }
 }))
 
@@ -119,6 +132,44 @@ export const Home = () => {
                     <Paper className={classes.tweetsWrapper} variant='outlined'>
                         <Paper className={classes.tweetsHeader} variant='outlined'>
                             <Typography variant='h6'>Главная</Typography>
+                        </Paper>
+                        <Paper className={classes.tweetsHeader} variant='outlined'>
+                            <Grid container spacing={3}>
+                                <Grid item xs={1}>
+                                    <Avatar alt="user Avatar" src="https://sun9-74.userapi.com/impg/gmdJPjBAe2xQWQMW9c2Lr4nHDlSUkR0_NkWkuw/_7QkDKCtiCs.jpg?size=1600x1600&quality=95&sign=0be456bfbdcb645ed228697ce9c8204a&type=album" />
+                                </Grid>
+                                <Grid item xs={11}>
+                                    <Typography><b>Alina Rebzon</b> <span className={classes.tweetsUserName}>@rebzon</span></Typography>
+                                    <Typography variant="body1" gutterBottom>Жарю пельмени</Typography>
+                                    <div className={classes.tweetFooter}>
+                                        <div>
+                                            <IconButton>
+                                                <CommentIcon style={{ fontSize: 20 }} />
+                                            </IconButton>
+                                            <span>1</span>
+                                        </div>
+                                        <div>
+                                            <IconButton>
+                                                <RepostIcon style={{ fontSize: 20 }} />
+                                            </IconButton>
+
+                                        </div>
+                                        <div>
+                                            <IconButton>
+                                                <LikeIcon style={{ fontSize: 20 }} />
+                                            </IconButton>
+
+                                        </div>
+                                        <div>
+                                            <IconButton>
+                                                <ShareIcon style={{ fontSize: 20 }} />
+                                            </IconButton>
+
+                                        </div>
+
+                                    </div>
+                                </Grid>
+                            </Grid>
                         </Paper>
                     </Paper>
                 </Grid>
