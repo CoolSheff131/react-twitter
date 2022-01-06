@@ -1,6 +1,6 @@
 import React from 'react';
-import { useHomeStyles } from '../pages/Home';
-import { Avatar, Grid, IconButton, Paper, Typography } from '@material-ui/core'
+import { useHomeStyles } from '../pages/Home/theme';
+import { Avatar, IconButton, Paper, Typography } from '@material-ui/core'
 import CommentIcon from '@material-ui/icons/ChatBubbleOutlineOutlined'
 import RepostIcon from '@material-ui/icons/RepeatOutlined'
 import LikeIcon from '@material-ui/icons/FavoriteBorderOutlined'

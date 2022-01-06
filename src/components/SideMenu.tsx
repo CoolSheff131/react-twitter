@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Hidden, IconButton, Typography } from '@material-ui/core'
-import { useHomeStyles } from '../pages/Home'
+import { useHomeStyles } from '../pages/Home/theme';
 import TwitterIcon from '@material-ui/icons/Twitter'
 import SearchIcon from '@material-ui/icons/Search'
 import NotificationIcon from '@material-ui/icons/NotificationsNoneOutlined'
@@ -9,12 +9,21 @@ import BookmarkIcon from '@material-ui/icons/BookmarkBorderOutlined'
 import ListIcon from '@material-ui/icons/ListAltOutlined'
 import UserIcon from '@material-ui/icons/PermIdentityOutlined'
 import CreateIcon from '@material-ui/icons/Create'
+import ModalBlock from './ModalBlock';
+import { AddTweetForm } from './AddTweetForm';
 
 interface SideMenuProps {
     classes: ReturnType<typeof useHomeStyles>
 }
 
 export const SideMenu: React.FC<SideMenuProps> = ({ classes }: SideMenuProps): React.ReactElement => {
+    const [visibleAddTweet, setvisibleAddTweet] = React.useState<boolean>(false)
+    const handleClickOpenAddTweet = () => {
+        setvisibleAddTweet(true)
+    }
+    const handleCloseAddTweet = () => {
+        setvisibleAddTweet(false)
+    }
     return (
         <ul className={classes.sideMenuList}>
             <li className={classes.sideMenuListItem}>
@@ -75,7 +84,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({ classes }: SideMenuProps): R
                 </div>
             </li>
             <li className={classes.sideMenuListItem}>
-                <Button className={classes.sideMenuTweetButton} variant="contained" color="primary" fullWidth>
+                <Button onClick={handleClickOpenAddTweet} className={classes.sideMenuTweetButton} variant="contained" color="primary" fullWidth>
                     <Hidden smDown>
                         Твитнуть
                     </Hidden>
@@ -83,6 +92,11 @@ export const SideMenu: React.FC<SideMenuProps> = ({ classes }: SideMenuProps): R
                         <CreateIcon />
                     </Hidden>
                 </Button>
+                <ModalBlock onClose={handleCloseAddTweet} visible={visibleAddTweet} >
+                    <div style={{ width: 550 }}>
+                        <AddTweetForm classes={classes} />
+                    </div>
+                </ModalBlock>
             </li>
         </ul>
     )
