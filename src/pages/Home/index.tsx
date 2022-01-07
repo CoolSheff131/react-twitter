@@ -1,4 +1,4 @@
-import { Avatar, Button, Container, Divider, Grid, InputAdornment, List, ListItem, ListItemAvatar, ListItemText, Paper, TextField, Theme, Typography } from '@material-ui/core'
+import { Avatar, Button, CircularProgress, Container, Divider, Grid, InputAdornment, List, ListItem, ListItemAvatar, ListItemText, Paper, TextField, Theme, Typography } from '@material-ui/core'
 import React from 'react'
 
 import { Tweet } from '../../components/Tweet'
@@ -8,9 +8,19 @@ import { PersonAddOutlined } from '@material-ui/icons'
 import { AddTweetForm } from '../../components/AddTweetForm'
 import { useHomeStyles } from './theme'
 import { SearchTextField } from '../../components/SearchTextField'
+import { fetchTweets } from '../../store/ducks/tweets/contracts/actionCreator'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectIsTweetsLoading, selectTweetsItems } from '../../store/ducks/tweets/selectors'
 
 export const Home = (): React.ReactElement => {
+    const dispatch = useDispatch()
     const classes = useHomeStyles();
+    const tweets = useSelector(selectTweetsItems)
+    const isLoading = useSelector(selectIsTweetsLoading)
+
+    React.useEffect(() => {
+        dispatch(fetchTweets())
+    }, [])
     return (
         <Container className={classes.wrapper} maxWidth="lg">
             <Grid container spacing={3}>
@@ -29,6 +39,14 @@ export const Home = (): React.ReactElement => {
                             </div>
                             <div className={classes.addFormBottomLine} />
                         </Paper>
+                        {isLoading ? (<div className={classes.tweetsCentred}> <CircularProgress /></div>) :
+                            tweets.map(tweet => <Tweet
+                                key={tweet._id}
+                                text={tweet.text}
+                                user={tweet.user}
+                                classes={classes} />
+                            )
+                        }
                         <Tweet text='Жарю пельмени'
                             user={{
                                 fullname: 'Alina Rebzon',

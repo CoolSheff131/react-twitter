@@ -91,6 +91,10 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     tweetsUserName: {
         color: grey[500]
     },
+    tweetsCentred: {
+        marginTop: 40,
+        textAlign: 'center'
+    },
     rightSide: {
         paddingTop: 20,
         position: 'sticky',
