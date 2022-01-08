@@ -15,6 +15,7 @@ import { fetchTags } from '../../store/ducks/tags/contracts/actionCreator'
 import { Tags } from '../../components/Tags'
 import { Route, Routes } from 'react-router-dom'
 import { BackButton } from '../../components/BackButton'
+import { FullTweet } from './components/FullTweet'
 
 export const Home = (): React.ReactElement => {
     const dispatch = useDispatch()
@@ -57,6 +58,7 @@ export const Home = (): React.ReactElement => {
                                     classes={classes} />
                                 )
                             } />
+                            <Route path="/home/tweet/:id" element={<FullTweet />} />
                         </Routes >
 
                     </Paper>
