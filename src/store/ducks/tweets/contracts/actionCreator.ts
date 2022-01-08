@@ -1,24 +1,6 @@
 import { Action } from "redux";
-import { LoadingState, Tweet, TweetsState } from "./state";
-
-export enum TweetsActionsType{
-    SET_TWEETS = 'tweets/SET_TWEETS',
-    FETCH_TWEETS = 'tweets/FETCH_TWEETS',
-    SET_LOADING_STATE = 'tweets/SET_LOADING_STATE',
-}
-
-export interface SetTweetsActionInterface extends Action<TweetsActionsType>{
-    type: TweetsActionsType.SET_TWEETS;
-    payload: TweetsState['items'];
-}
-export interface FetchTweetsActionInterface extends Action<TweetsActionsType>{
-    type: TweetsActionsType.FETCH_TWEETS;
-}
-
-export interface SetTweetsLoadingStateActionInterface extends Action<TweetsActionsType>{
-    type: TweetsActionsType.SET_LOADING_STATE;
-    payload: LoadingState,
-}
+import { SetTweetsActionInterface, SetTweetsLoadingStateActionInterface, FetchTweetsActionInterface, FetchAddTweetActionInterface, AddTweetActionInterface, SetAddFormStateActionInterface, TweetsActionsType } from "./actionTypes";
+import { AddFormState, LoadingState, Tweet, TweetsState } from "./state";
 
 export const setTweets = (payload: TweetsState['items']): SetTweetsActionInterface => ({
     type: TweetsActionsType.SET_TWEETS,
@@ -34,5 +16,24 @@ export const fetchTweets = (): FetchTweetsActionInterface => ({
     type: TweetsActionsType.FETCH_TWEETS, 
 })
 
-export type TweetsActions = SetTweetsActionInterface |
-FetchTweetsActionInterface| SetTweetsLoadingStateActionInterface
+
+
+export type TweetsActions = SetTweetsActionInterface
+| FetchTweetsActionInterface 
+| SetTweetsLoadingStateActionInterface
+| FetchAddTweetActionInterface
+| AddTweetActionInterface
+
+export const fetchAddTweet = (payload: string): FetchAddTweetActionInterface => ({
+    type: TweetsActionsType.FETCH_ADD_TWEET,
+    payload,
+})
+export const addTweet = (payload: Tweet): AddTweetActionInterface => ({
+    type: TweetsActionsType.ADD_TWEET,
+    payload,
+})
+
+export const setAddFormState = (payload: AddFormState):SetAddFormStateActionInterface =>({
+    type: TweetsActionsType.SET_ADD_FORM_STATE,
+    payload,
+})

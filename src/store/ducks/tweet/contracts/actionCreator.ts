@@ -14,6 +14,7 @@ export const setTweetLoadingState = (payload: LoadingState): SetTweetLoadingStat
     payload,
 })
 
+
 export const fetchTweetData = (payload: string ): FetchTweetDataActionInterface => ({
     type: TweetActionsType.FETCH_TWEET_DATA, 
     payload

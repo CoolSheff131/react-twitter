@@ -3,9 +3,9 @@ import { Tweet } from "../../tweets/contracts/state";
 import { LoadingState, TweetState } from "./state";
 
 export enum TweetActionsType{
-    SET_TWEET_DATA = 'tags/SET_DATA',
-    FETCH_TWEET_DATA = 'tags/FETCH_DATA',
-    SET_LOADING_STATE = 'tags/SET_LOADING_STATE',
+    SET_TWEET_DATA = 'tweet/SET_DATA',
+    FETCH_TWEET_DATA = 'tweetFETCH_DATA',
+    SET_LOADING_STATE = 'tweet/SET_LOADING_STATE',
 }
 
 export interface SetTweetDataActionInterface extends Action<TweetActionsType>{

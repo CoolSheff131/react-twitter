@@ -1,5 +1,6 @@
 //@ts-nocheck
 
+import { METHODS } from "http";
 import { call,put, takeEvery } from "redux-saga/effects";
 
 import { setTweetLoadingState } from "./contracts/actionCreator";
@@ -14,10 +15,11 @@ export function* fetchTweetDataRequest({payload: tweetId}: FetchTweetDataActionI
     }catch(error){
         yield put(setTweetLoadingState(LoadingState.ERROR))
     }
-    
-    
 }
+
+
 
 export function* tweetSaga(){
     yield takeEvery(TweetActionsType.FETCH_TWEET_DATA, fetchTweetDataRequest)
+    
 }
