@@ -1,10 +1,10 @@
-import { Avatar, Button, CircularProgress, Container, Divider, Grid, InputAdornment, List, ListItem, ListItemAvatar, ListItemText, Paper, TextField, Theme, Typography } from '@material-ui/core'
+import { Avatar, Button, CircularProgress, Container, Divider, Grid, IconButton, InputAdornment, List, ListItem, ListItemAvatar, ListItemText, Paper, TextField, Theme, Typography } from '@material-ui/core'
 import React from 'react'
 
 import { Tweet } from '../../components/Tweet'
 import { SideMenu } from '../../components/SideMenu'
 import SearchIcon from '@material-ui/icons/SearchOutlined'
-import { PersonAddOutlined } from '@material-ui/icons'
+import { ArrowBack, PersonAddOutlined } from '@material-ui/icons'
 import { AddTweetForm } from '../../components/AddTweetForm'
 import { useHomeStyles } from './theme'
 import { SearchTextField } from '../../components/SearchTextField'
@@ -14,6 +14,7 @@ import { selectIsTweetsLoading, selectTweetsItems } from '../../store/ducks/twee
 import { fetchTags } from '../../store/tags/contracts/actionCreator'
 import { Tags } from '../../components/Tags'
 import { Route, Routes } from 'react-router-dom'
+import { BackButton } from '../../components/BackButton'
 
 export const Home = (): React.ReactElement => {
     const dispatch = useDispatch()
@@ -34,6 +35,11 @@ export const Home = (): React.ReactElement => {
                 <Grid sm={8} item md={6}>
                     <Paper className={classes.tweetsWrapper} variant='outlined'>
                         <Paper className={classes.tweetsHeader} variant='outlined'>
+                            <Routes>
+                                <Route path="/home/*" element={
+                                    <BackButton />
+                                } />
+                            </Routes>
                             <Typography variant='h6'>Главная</Typography>
                         </Paper>
                         <Paper>
@@ -47,21 +53,12 @@ export const Home = (): React.ReactElement => {
                             <Route path="home" element={isLoading ? (<div className={classes.tweetsCentred}> <CircularProgress /></div>) :
                                 tweets.map(tweet => <Tweet
                                     key={tweet._id}
-                                    text={tweet.text}
-                                    user={tweet.user}
+                                    {...tweet}
                                     classes={classes} />
                                 )
                             } />
                         </Routes >
 
-
-                        <Tweet text='Жарю пельмени'
-                            user={{
-                                fullname: 'Alina Rebzon',
-                                username: 'Rebzon',
-                                avatarUrl: 'https://sun9-74.userapi.com/impg/gmdJPjBAe2xQWQMW9c2Lr4nHDlSUkR0_NkWkuw/_7QkDKCtiCs.jpg?size=1600x1600&quality=95&sign=0be456bfbdcb645ed228697ce9c8204a&type=album'
-                            }}
-                            classes={classes} />
                     </Paper>
                 </Grid>
                 <Grid item sm={3} md={3}>
