@@ -1,10 +1,13 @@
-import { Avatar, Button, CircularProgress, IconButton, TextareaAutosize } from '@material-ui/core'
+import { Avatar, Button, CircularProgress, IconButton, Snackbar, TextareaAutosize } from '@material-ui/core'
 import classNames from 'classnames'
 import React from 'react'
 import { ImageOutlined as ImageOutlinedIcon, PersonAddOutlined, SentimentSatisfiedOutlined as EmojiIcon } from '@material-ui/icons'
 import { useHomeStyles } from '../pages/Home/theme';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addTweet, fetchAddTweet } from '../store/ducks/tweets/contracts/actionCreator';
+import { selectAddFormState } from '../store/ducks/tweets/selectors';
+import { AddFormState } from '../store/ducks/tweets/contracts/state';
+import Alert from '@material-ui/lab/Alert'
 
 interface AddTweetFormProps {
     classes: ReturnType<typeof useHomeStyles>;
@@ -17,8 +20,11 @@ const MAX_LENGTH = 280;
 export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows = 15 }: AddTweetFormProps): React.ReactElement => {
     const dispatch = useDispatch()
     const [text, setText] = React.useState<string>('')
+
+    const addFormState = useSelector(selectAddFormState)
     const textLimitPercent = (text.length / 280) * 100;
     const textCount = MAX_LENGTH - text.length
+
 
     const handleChangeTextarea = (e: React.FormEvent<HTMLTextAreaElement>): void => {
         if (e.currentTarget) {
@@ -29,8 +35,10 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows = 1
         setText('')
         dispatch(fetchAddTweet(text))
     }
+
     return (
         <div >
+
             <div className={classes.addFormBody}>
                 <Avatar
                     className={classes.tweetAvatar}
@@ -69,6 +77,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows = 1
                     </Button>
                 </div>
             </div>
+            {addFormState === AddFormState.ERROR && <Alert severity="error">Ошибка при добавлении твита</Alert>}
         </div>
     )
 }

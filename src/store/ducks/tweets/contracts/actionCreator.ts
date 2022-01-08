@@ -23,6 +23,7 @@ export type TweetsActions = SetTweetsActionInterface
 | SetTweetsLoadingStateActionInterface
 | FetchAddTweetActionInterface
 | AddTweetActionInterface
+| SetAddFormStateActionInterface
 
 export const fetchAddTweet = (payload: string): FetchAddTweetActionInterface => ({
     type: TweetsActionsType.FETCH_ADD_TWEET,
