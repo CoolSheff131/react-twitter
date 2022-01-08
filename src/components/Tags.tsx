@@ -3,8 +3,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useHomeStyles } from '../pages/Home/theme'
-import { TagsState } from '../store/tags/contracts/state'
-import { selectIsTagsLoaded, selectTagsItems } from '../store/tags/selectors'
+import { TagsState } from '../store/ducks/tags/contracts/state'
+import { selectIsTagsLoaded, selectTagsItems } from '../store/ducks/tags/selectors'
 
 
 interface TagsProps {

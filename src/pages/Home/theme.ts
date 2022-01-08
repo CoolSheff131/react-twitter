@@ -57,7 +57,11 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
         fontSize: 32,
     },
     tweet: {
+        display: 'flex',
         cursor: 'pointer',
+        alignItems: 'flex-start',
+        paddingTop: 15,
+        paddingLeft: 20,
         '&:hover': {
             backgroundColor: 'rgb(245, 248, 250)'
         }
