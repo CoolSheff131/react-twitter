@@ -11,6 +11,8 @@ import { SearchTextField } from '../../components/SearchTextField'
 import { fetchTweets } from '../../store/ducks/tweets/contracts/actionCreator'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectIsTweetsLoading, selectTweetsItems } from '../../store/ducks/tweets/selectors'
+import { fetchTags } from '../../store/tags/contracts/actionCreator'
+import { Tags } from '../../components/Tags'
 
 export const Home = (): React.ReactElement => {
     const dispatch = useDispatch()
@@ -20,6 +22,7 @@ export const Home = (): React.ReactElement => {
 
     React.useEffect(() => {
         dispatch(fetchTweets())
+        dispatch(fetchTags())
     }, [])
     return (
         <Container className={classes.wrapper} maxWidth="lg">
@@ -69,28 +72,7 @@ export const Home = (): React.ReactElement => {
                                 ),
                             }}
                             fullWidth />
-                        <Paper className={classes.rightSideBlock}>
-                            <Paper className={classes.rightSideBlockHeader}>
-                                <b>Актуальные темы</b>
-
-                            </Paper>
-                            <List>
-                                <ListItem className={classes.rightSideBlockItem}>
-                                    <ListItemText primary="Санкт петербург"
-                                        secondary={<Typography component="span" variant='body2'>
-                                            Твитов 3 331
-                                        </Typography>} />
-                                </ListItem>
-                                <Divider component="li" />
-                                <ListItem className={classes.rightSideBlockItem}>
-                                    <ListItemText primary="Беларусь"
-                                        secondary={<Typography component="span" variant='body2'>
-                                            Твитов 13 331
-                                        </Typography>} />
-                                </ListItem>
-                                <Divider component="li" />
-                            </List>
-                        </Paper>
+                        <Tags classes={classes} />
                         <Paper className={classes.rightSideBlock}>
                             <Paper className={classes.rightSideBlockHeader}>
                                 <b>Кого читать</b>
