@@ -1,6 +1,7 @@
 import { Paper, List, ListItem, ListItemText, Typography, Divider } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { useHomeStyles } from '../pages/Home/theme'
 import { TagsState } from '../store/tags/contracts/state'
 import { selectIsTagsLoaded, selectTagsItems } from '../store/tags/selectors'
@@ -34,10 +35,12 @@ export const Tags: React.FC<TagsProps> = ({ classes }: TagsProps): React.ReactEl
                     items.map(item =>
                         <React.Fragment key={item._id}>
                             <ListItem className={classes.rightSideBlockItem}>
-                                <ListItemText primary={item.name}
-                                    secondary={<Typography component="span" variant='body2'>
-                                        Твитов {item.count}
-                                    </Typography>} />
+                                <Link to={`/home/search?q=${item.name}`}>
+                                    <ListItemText primary={item.name}
+                                        secondary={<Typography component="span" variant='body2'>
+                                            Твитов {item.count}
+                                        </Typography>} />
+                                </Link>
                             </ListItem>
                             <Divider component="li" />
                         </React.Fragment>

@@ -93,9 +93,9 @@
       ],
       "tags":[
           {"_id":"5f625ff606bc4fda1e7bf710", "name":"#AAAAA","count": 1234},
-          {"_id":"5f625ff606bc4fda1e7bf712","name":"#AAAAA","count": 1234},
-          {"_id":"5f625ff606bc1231da1e7bf710","name":"#AAAAA","count": 1234},
-          {"_id":"5f621234f606bc1231da1e7bf710","name":"#AAAAA","count": 1234}],
+          {"_id":"5f625ff606bc4fda1e7bf712","name":"AAAAA","count": 1234},
+          {"_id":"5f625ff606bc1231da1e7bf710","name":"AAAAA","count": 1234},
+          {"_id":"5f621234f606bc1231da1e7bf710","name":"AAAAA","count": 1234}],
       "users":[{
         "_id":"5f625ff606bc4fda1e7bf710",
       "fullname": "Dickerson Mcleod",
