@@ -1,7 +1,9 @@
-import { CircularProgress } from '@material-ui/core'
+import { Avatar, CircularProgress, IconButton, Paper, Typography } from '@material-ui/core'
+import classNames from 'classnames'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { text } from 'stream/consumers'
 import { Tweet } from '../../../components/Tweet'
 import { fetchTweetData, setTweetData } from '../../../store/ducks/tweet/contracts/actionCreator'
 import { selectIsTweetLoading, selectTweetData } from '../../../store/ducks/tweet/selectors'
@@ -22,15 +24,55 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
             dispatch(setTweetData(undefined))
         }
     }, [])
-    if (!tweetData) {
-        return null
-    }
-    return isLoading ? (
-        <div className={classes.tweetsCentred}>
+    if (isLoading) {
+        return (<div className={classes.tweetsCentred}>
             <CircularProgress />
-        </div>
-    ) : (
-        <Tweet classes={classes} {...tweetData} />
-    )
-
+        </div>)
+    }
+    if (tweetData) {
+        return <Paper className={classes.fullTweet}>
+            <div className={classNames(classes.tweetsHeaderUser)}>
+                <Avatar
+                    alt="user Avatar"
+                    src={tweetData.user.avatarUrl}
+                    className={classes.tweetAvatar}
+                />
+                <Typography>
+                    <b>{tweetData.user.fullname}</b>&nbsp;
+                    <div>
+                        <span className={classes.tweetsUserName}>@{tweetData.user.username}</span>&nbsp;
+                        <span className={classes.tweetsUserName}>.</span>&nbsp;
+                        <span className={classes.tweetsUserName}>1ч</span>
+                    </div>
+                </Typography>
+            </div>
+            <Typography className={classes.fullTweetText} gutterBottom>
+                {tweetData.text}
+            </Typography>
+            {/* <div className={classes.tweetFooter}>
+                    <div>
+                        <IconButton>
+                            <CommentIcon style={{ fontSize: 20 }} />
+                        </IconButton>
+                        <span>1</span>
+                    </div>
+                    <div>
+                        <IconButton>
+                            <RepostIcon style={{ fontSize: 20 }} />
+                        </IconButton>
+                    </div>
+                    <div>
+                        <IconButton>
+                            <LikeIcon style={{ fontSize: 20 }} />
+                        </IconButton>
+                    </div>
+                    <div>
+                        <IconButton>
+                            <ShareIcon style={{ fontSize: 20 }} />
+                        </IconButton>
+                    </div>
+                </div> */}
+        </Paper>
+    }
+    return null
 }
