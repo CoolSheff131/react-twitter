@@ -3,7 +3,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Tweet } from '../../../components/Tweet'
-import { fetchTweetData } from '../../../store/ducks/tweet/contracts/actionCreator'
+import { fetchTweetData, setTweetData } from '../../../store/ducks/tweet/contracts/actionCreator'
 import { selectIsTweetLoading, selectTweetData } from '../../../store/ducks/tweet/selectors'
 import { useHomeStyles } from '../theme'
 
@@ -17,6 +17,9 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
     React.useEffect(() => {
         if (id) {
             dispatch(fetchTweetData(id))
+        }
+        return () => {
+            dispatch(setTweetData(undefined))
         }
     }, [])
     if (!tweetData) {
