@@ -52,11 +52,14 @@ export const Home = (): React.ReactElement => {
                         </Paper>
                         <Routes>
                             <Route path="home" element={isLoading ? (<div className={classes.tweetsCentred}> <CircularProgress /></div>) :
-                                tweets.map(tweet => <Tweet
-                                    key={tweet._id}
-                                    {...tweet}
-                                    classes={classes} />
-                                )
+                                tweets.map(tweet => {
+                                    console.log(tweet);
+
+                                    return <Tweet
+                                        key={tweet._id}
+                                        {...tweet}
+                                        classes={classes} />
+                                })
                             } />
                             <Route path="/home/tweet/:id" element={<FullTweet />} />
                         </Routes >

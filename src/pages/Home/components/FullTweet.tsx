@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { text } from 'stream/consumers'
 import { Tweet } from '../../../components/Tweet'
+import format from 'date-fns/format'
+import ruLand from 'date-fns/locale/ru'
 import { fetchTweetData, setTweetData } from '../../../store/ducks/tweet/contracts/actionCreator'
 import { selectIsTweetLoading, selectTweetData } from '../../../store/ducks/tweet/selectors'
 import { useHomeStyles } from '../theme'
@@ -42,7 +44,8 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
                     <div>
                         <span className={classes.tweetsUserName}>@{tweetData.user.username}</span>&nbsp;
                         <span className={classes.tweetsUserName}>.</span>&nbsp;
-                        <span className={classes.tweetsUserName}>1ч</span>
+                        <span className={classes.tweetsUserName}>{format(new Date(tweetData.createdAt), 'H:mm', { locale: ruLand })}</span>
+                        <span className={classes.tweetsUserName}>{format(new Date(tweetData.createdAt), 'dd MMM. yyyy г.', { locale: ruLand })}</span>
                     </div>
                 </Typography>
             </div>
