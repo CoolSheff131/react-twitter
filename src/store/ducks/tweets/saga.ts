@@ -15,18 +15,10 @@ export function* fetchTweetsRequest(){
     }
 }
 
-export function* fetchAddTweetRequest({payload}: FetchAddTweetActionInterface){
+export function* fetchAddTweetRequest({payload: text}: FetchAddTweetActionInterface){
     try{
-        const data={
-            _id: Math.random().toString(36).substring(2),
-            text: payload,
-            user: {
-                fullname: "Hebert Morrison",
-                username: "kristen",
-                avatarUrl: "https://source.unsplash.com/random/100x100?4"
-              }
-        }
-        const item = yield call(TweetsApi.addTweet,data)
+        
+        const item = yield call(TweetsApi.addTweet,text)
         yield put(addTweet(item))
     }catch(error){
         yield put(setAddFormState(AddFormState.ERROR))
