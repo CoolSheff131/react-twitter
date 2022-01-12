@@ -1,13 +1,14 @@
 import React from 'react';
 import { useHomeStyles } from '../pages/Home/theme';
-import { Avatar, IconButton, Paper, Typography } from '@material-ui/core'
+import { Avatar, IconButton, Menu, MenuItem, Paper, Typography } from '@material-ui/core'
 import CommentIcon from '@material-ui/icons/ChatBubbleOutlineOutlined'
 import RepostIcon from '@material-ui/icons/RepeatOutlined'
 import LikeIcon from '@material-ui/icons/FavoriteBorderOutlined'
 import ShareIcon from '@material-ui/icons/ReplyOutlined'
 import classNames from 'classnames'
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import { formatDate } from '../utils/formatDate';
+import { MoreVertRounded } from '@material-ui/icons';
 
 interface TweetProps {
   _id: string;
@@ -22,8 +23,27 @@ interface TweetProps {
 }
 
 export const Tweet: React.FC<TweetProps> = ({ _id, classes, user, text, createdAt }: TweetProps): React.ReactElement => {
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+  const navigate = useNavigate()
+
+  const handleClickTweet = (event: React.MouseEvent<HTMLAnchorElement>): void => {
+    event.preventDefault()
+    navigate(`/home/tweet/${_id}`)
+  }
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault()
+    event.stopPropagation()
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
   return (
-    <Link className={classes.tweetWrapper} to={`/home/tweet/${_id}`} >
+    <a onClick={handleClickTweet} className={classes.tweetWrapper} >
       <Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant="outlined">
 
         <Avatar
@@ -38,7 +58,22 @@ export const Tweet: React.FC<TweetProps> = ({ _id, classes, user, text, createdA
             <span className={classes.tweetsUserName}>@{user.username}</span>&nbsp;
             <span className={classes.tweetsUserName}>.</span>&nbsp;
             <span className={classes.tweetsUserName}>{formatDate(new Date(createdAt))}</span>
-
+            <div className={classes.tweetPopupMenu}>
+              <IconButton onClick={handleClick}>
+                <MoreVertRounded />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}>
+                <MenuItem>
+                  Редактировать
+                </MenuItem>
+                <MenuItem>
+                  Удалить
+                </MenuItem>
+              </Menu>
+            </div>
           </Typography>
           <Typography variant="body1" gutterBottom>
             {text}
@@ -68,6 +103,6 @@ export const Tweet: React.FC<TweetProps> = ({ _id, classes, user, text, createdA
           </div>
         </div>
       </Paper>
-    </Link>
+    </a>
   );
 };

@@ -4,9 +4,10 @@ import SearchIcon from '@material-ui/icons/Search'
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline'
 import ModeCommentOutlined from '@material-ui/icons/ModeCommentOutlined'
 import React from 'react'
-import ModalBlock from '../components/ModalBlock'
 import FormGroup from '@material-ui/core/FormGroup'
 import TextField from '@material-ui/core/TextField'
+import { LoginModal } from './components/LoginModal'
+import ModalBlock from '../../components/ModalBlock'
 
 
 
@@ -123,34 +124,8 @@ export const SignIn: React.FC = (): React.ReactElement => {
                     <br></br>
                     <Button onClick={handleClickOpenSignUp} style={{ marginBottom: 20 }} variant='contained' color="primary" fullWidth>Зарегестрироваться</Button>
                     <Button onClick={handleClickOpenSignIn} variant='outlined' color="primary" fullWidth>Войти</Button>
-                    <ModalBlock visible={visibleModal === 'signIn'} onClose={handleCloseModal} title="Войти в аккаунт" classes={classes}>
-                        <FormControl className={classes.loginFormControl} component="fieldset" fullWidth>
-                            <FormGroup aria-label="position" row>
-                                <TextField autoFocus
-                                    className={classes.loginSideField}
-                                    margin='dense'
-                                    id='email'
-                                    label="Email Address"
-                                    InputLabelProps={{ shrink: true }}
-                                    variant="filled"
-                                    type="email"
-                                    fullWidth />
-                                <TextField autoFocus
-                                    className={classes.loginSideField}
-                                    margin='dense'
-                                    id='password'
-                                    label="Пароль"
-                                    InputLabelProps={{ shrink: true }}
-                                    variant="filled"
-                                    type="password"
-                                    fullWidth />
-                                <Button onClick={handleCloseModal} variant='contained' color="primary" fullWidth>
-                                    Войти
-                                </Button>
-                            </FormGroup>
-                        </FormControl>
-                    </ModalBlock>
 
+                    <LoginModal open={visibleModal === 'signIn'} onClose={handleCloseModal} />
                     <ModalBlock visible={visibleModal === 'signUp'} onClose={handleCloseModal} title="Создайте учетную запись" classes={classes}>
                         <FormControl className={classes.loginFormControl} component="fieldset" fullWidth>
                             <FormGroup aria-label="position" row>

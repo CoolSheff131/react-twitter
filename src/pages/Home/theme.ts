@@ -61,6 +61,7 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
         cursor: 'pointer',
         alignItems: 'flex-start',
         paddingTop: 15,
+        position: 'relative',
         paddingLeft: 20,
         '&:hover': {
             backgroundColor: 'rgb(245, 248, 250)'
@@ -94,6 +95,12 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     tweetAvatar: {
         width: theme.spacing(5),
         height: theme.spacing(5)
+    },
+    tweetPopupMenu:{
+        position: 'absolute',
+        right: 0,
+        top: 0,
+
     },
     tweetFooter: {
         display: 'flex',
