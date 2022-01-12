@@ -5,6 +5,7 @@ import { rootReducer } from './rootReducer'
 import rootSaga from './sagas'
 import { TagsState } from './ducks/tags/contracts/state'
 import { TweetState } from './ducks/tweet/contracts/state'
+import { UserState } from './ducks/user/contracts/state'
 
 declare global{
     interface Window{
@@ -18,6 +19,7 @@ export interface RootState{
     tweets: TweetsState;
     tags: TagsState;
     tweet: TweetState;
+    user: UserState;
 }
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
