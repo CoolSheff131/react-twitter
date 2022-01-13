@@ -54,8 +54,6 @@ export const Home = (): React.ReactElement => {
                         <Routes>
                             <Route path="home" element={isLoading ? (<div className={classes.tweetsCentred}> <CircularProgress /></div>) :
                                 tweets.map(tweet => {
-                                    console.log(tweet);
-
                                     return <Tweet
                                         key={tweet._id}
                                         {...tweet}

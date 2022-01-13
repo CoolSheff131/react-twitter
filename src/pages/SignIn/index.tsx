@@ -8,6 +8,7 @@ import FormGroup from '@material-ui/core/FormGroup'
 import TextField from '@material-ui/core/TextField'
 import { LoginModal } from './components/LoginModal'
 import ModalBlock from '../../components/ModalBlock'
+import { RegisterModal } from './components/RegisterModal'
 
 
 
@@ -126,43 +127,7 @@ export const SignIn: React.FC = (): React.ReactElement => {
                     <Button onClick={handleClickOpenSignIn} variant='outlined' color="primary" fullWidth>Войти</Button>
 
                     <LoginModal open={visibleModal === 'signIn'} onClose={handleCloseModal} />
-                    <ModalBlock visible={visibleModal === 'signUp'} onClose={handleCloseModal} title="Создайте учетную запись" classes={classes}>
-                        <FormControl className={classes.loginFormControl} component="fieldset" fullWidth>
-                            <FormGroup aria-label="position" row>
-                                <TextField autoFocus
-                                    className={classes.registerSideField}
-                                    margin='dense'
-                                    id='name'
-                                    label="Имя"
-                                    InputLabelProps={{ shrink: true }}
-                                    variant="filled"
-                                    type="name"
-                                    fullWidth />
-                                <TextField autoFocus
-                                    className={classes.registerSideField}
-                                    margin='dense'
-                                    id='email'
-                                    label="E-mail"
-                                    InputLabelProps={{ shrink: true }}
-                                    variant="filled"
-                                    type="email"
-                                    fullWidth />
-                                <TextField autoFocus
-                                    className={classes.registerSideField}
-                                    margin='dense'
-                                    id='password'
-                                    label="Пароль"
-                                    InputLabelProps={{ shrink: true }}
-                                    variant="filled"
-                                    type="password"
-                                    fullWidth />
-                                <Button onClick={handleCloseModal} variant='contained' color="primary" fullWidth>
-                                    Далее
-                                </Button>
-                            </FormGroup>
-                        </FormControl>
-                    </ModalBlock>
-
+                    <RegisterModal open={visibleModal === 'signUp'} onClose={handleCloseModal} />
                 </div>
             </section>
         </div>

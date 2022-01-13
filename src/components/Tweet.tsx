@@ -53,7 +53,7 @@ export const Tweet: React.FC<TweetProps> = ({ _id, classes, user, text, createdA
         />
         <div>
 
-          <Typography>
+          <div>
             <b>{user.fullname}</b>&nbsp;
             <span className={classes.tweetsUserName}>@{user.username}</span>&nbsp;
             <span className={classes.tweetsUserName}>.</span>&nbsp;
@@ -74,7 +74,7 @@ export const Tweet: React.FC<TweetProps> = ({ _id, classes, user, text, createdA
                 </MenuItem>
               </Menu>
             </div>
-          </Typography>
+          </div>
           <Typography variant="body1" gutterBottom>
             {text}
           </Typography>

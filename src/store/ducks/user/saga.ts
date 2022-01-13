@@ -17,7 +17,19 @@ export function* fetchSignInRequest({payload}: FetchSignInActionInterface){
     }
 }
 
+export function* fetchSignUpRequest({payload}: FetchSignUpActionInterface){
+    try{
+        yield put(setUserLoadingStatus(LoadingState.LOADING))
+        const {data} = yield call(AuthApi.signUp,payload)
+        
+        yield put(setUserLoadingStatus(LoadingState.SUCCESS))
+    }catch(error){
+        yield put(setUserLoadingStatus(LoadingState.ERROR))
+    }
+}
+
 export function* userSaga(){
     yield takeEvery(UserActionsType.FETCH_SIGN_IN, fetchSignInRequest)
+    yield takeEvery(UserActionsType.FETCH_SIGN_UP, fetchSignUpRequest)
  
 }
