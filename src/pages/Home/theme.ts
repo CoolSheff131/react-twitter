@@ -212,5 +212,21 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     addFormBottomRight: {
         display: 'flex',
         alignItems: 'center',
+    },
+    imagesList:{
+        display: 'flex',
+        alignItems: 'center',
+        marginTop: 20,
+        flexWrap: 'wrap'
+    },
+    imagesListItem:{
+        width: 50,
+        height: 50,
+        overflow: 'hidden',
+        borderRadius: 6,
+        marginRight: 10,
+        marginBottom: 10,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center' 
     }
 }))

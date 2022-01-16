@@ -8,6 +8,7 @@ import { addTweet, fetchAddTweet } from '../store/ducks/tweets/contracts/actionC
 import { selectAddFormState } from '../store/ducks/tweets/selectors';
 import { AddFormState } from '../store/ducks/tweets/contracts/state';
 import Alert from '@material-ui/lab/Alert'
+import { UploadImages } from './UploadImages';
 
 interface AddTweetFormProps {
     classes: ReturnType<typeof useHomeStyles>;
@@ -55,12 +56,10 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows = 1
             </div>
             <div className={classes.addFormBottom}>
                 <div className={classNames(classes.tweetFooter, classes.addFormActions)}>
-                    <IconButton color="primary">
-                        <ImageOutlinedIcon style={{ fontSize: 26 }} />
-                    </IconButton>
-                    <IconButton color="primary">
+                    <UploadImages />
+                    {/* <IconButton color="primary">
                         <EmojiIcon style={{ fontSize: 26 }} />
-                    </IconButton>
+                    </IconButton> */}
                 </div>
                 <div className={classes.addFormBottomRight}>
                     {text && (
