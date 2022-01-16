@@ -222,11 +222,21 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     imagesListItem:{
         width: 50,
         height: 50,
-        overflow: 'hidden',
+        
         borderRadius: 6,
         marginRight: 10,
         marginBottom: 10,
         backgroundSize: 'cover',
-        backgroundPosition: 'center' 
+        backgroundPosition: 'center' ,
+        '& svg path':{
+            fill: 'white'
+        }
+    },
+    imagesListRemove:{
+        position: 'relative',
+        top: -5,
+        right: -33,
+        padding: '0 !important',
+        backgroundColor: '#ff4d4d !important'
     }
 }))

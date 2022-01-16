@@ -17,6 +17,10 @@ interface AddTweetFormProps {
 
 const MAX_LENGTH = 280;
 
+export interface ImageObj {
+    blobUrl: string;
+    file: File;
+}
 
 export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows = 15 }: AddTweetFormProps): React.ReactElement => {
     const dispatch = useDispatch()
@@ -25,7 +29,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows = 1
     const addFormState = useSelector(selectAddFormState)
     const textLimitPercent = (text.length / 280) * 100;
     const textCount = MAX_LENGTH - text.length
-
+    const [images, setImages] = React.useState<ImageObj[]>([])
 
     const handleChangeTextarea = (e: React.FormEvent<HTMLTextAreaElement>): void => {
         if (e.currentTarget) {
@@ -56,7 +60,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows = 1
             </div>
             <div className={classes.addFormBottom}>
                 <div className={classNames(classes.tweetFooter, classes.addFormActions)}>
-                    <UploadImages />
+                    <UploadImages images={images} onChangeImages={setImages} />
                     {/* <IconButton color="primary">
                         <EmojiIcon style={{ fontSize: 26 }} />
                     </IconButton> */}

@@ -1,11 +1,16 @@
 import { IconButton } from '@material-ui/core'
-import { ImageOutlined } from '@material-ui/icons'
+import { Clear, ImageOutlined, RemoveCircle } from '@material-ui/icons'
 import React from 'react'
 import { useHomeStyles } from '../pages/Home/theme'
+import { ImageObj } from './AddTweetForm'
 
-export const UploadImages = () => {
+interface UploadImageProps {
+    images: ImageObj[];
+    onChangeImages: (callback: (images: ImageObj[]) => ImageObj[]) => void
+}
+
+export const UploadImages: React.FC<UploadImageProps> = ({ onChangeImages, images }) => {
     const classes = useHomeStyles()
-    const [images, setImages] = React.useState<string[]>([])
     const inputRef = React.useRef<HTMLInputElement>(null)
     const handleClick = () => {
         if (inputRef.current) {
@@ -18,11 +23,18 @@ export const UploadImages = () => {
             const file = target.files?.[0]
             if (file) {
                 const fileObj = new Blob([file])
-                setImages((prev) => [...prev, URL.createObjectURL(fileObj)])
+                onChangeImages(prev => [...prev, {
+                    file,
+                    blobUrl: URL.createObjectURL(fileObj)
+                }])
             }
             console.log(event)
         }
     }, [])
+
+    const removeImage = (url: string) => {
+        onChangeImages(prev => prev.filter(obj => obj.blobUrl !== url))
+    }
 
     React.useEffect(() => {
         if (inputRef.current) {
@@ -44,9 +56,11 @@ export const UploadImages = () => {
             <input ref={inputRef} type="file" hidden id="upload-input" />
             <div className={classes.imagesList}>
                 {
-                    images.map(url =>
-                        <div className={classes.imagesListItem} style={{ backgroundImage: `url(${url})` }}>
-
+                    images.map(obj =>
+                        <div key={obj.blobUrl} className={classes.imagesListItem} style={{ backgroundImage: `url(${obj.blobUrl})` }}>
+                            <IconButton className={classes.imagesListRemove} onClick={(): void => removeImage(obj.blobUrl)} color="primary">
+                                <Clear style={{ fontSize: 26 }} />
+                            </IconButton>
                         </div>
                     )
                 }
