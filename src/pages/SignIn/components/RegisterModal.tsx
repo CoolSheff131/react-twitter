@@ -57,152 +57,146 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({ open, onClose }): 
 
 
     return (
-        <Notification>
-            {callback => {
-                openNotificationRef.current = callback
-                return <ModalBlock visible={open} onClose={onClose} title="Войти в аккаунт" classes={classes}>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <FormControl className={classes.loginFormControl} component="fieldset" fullWidth>
-                            <FormGroup aria-label="position" row>
-                                <Controller
-                                    name="email"
-                                    control={control}
-                                    render={({
-                                        field: { onChange, onBlur, value, name, ref },
-                                        fieldState: { invalid, isTouched, isDirty, error },
-                                        formState,
-                                    }) => (
-                                        <TextField autoFocus
-                                            className={classes.loginSideField}
-                                            margin='dense'
+        <ModalBlock visible={open} onClose={onClose} title="Войти в аккаунт" classes={classes}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <FormControl className={classes.loginFormControl} component="fieldset" fullWidth>
+                    <FormGroup aria-label="position" row>
+                        <Controller
+                            name="email"
+                            control={control}
+                            render={({
+                                field: { onChange, onBlur, value, name, ref },
+                                fieldState: { invalid, isTouched, isDirty, error },
+                                formState,
+                            }) => (
+                                <TextField autoFocus
+                                    className={classes.loginSideField}
+                                    margin='dense'
 
-                                            label="Email Address"
-                                            InputLabelProps={{ shrink: true }}
-                                            variant="filled"
-                                            type="email"
-                                            fullWidth
-                                            error={!!error}
-                                            helperText={error?.message}
-                                            onBlur={onBlur} // notify when input is touched
-                                            onChange={onChange} // send value to hook form
-                                            inputRef={ref}
-                                        />
-                                    )}
+                                    label="Email Address"
+                                    InputLabelProps={{ shrink: true }}
+                                    variant="filled"
+                                    type="email"
+                                    fullWidth
+                                    error={!!error}
+                                    helperText={error?.message}
+                                    onBlur={onBlur} // notify when input is touched
+                                    onChange={onChange} // send value to hook form
+                                    inputRef={ref}
                                 />
-                                <Controller
-                                    name="username"
-                                    control={control}
-                                    render={({
-                                        field: { onChange, onBlur, value, name, ref },
-                                        fieldState: { invalid, isTouched, isDirty, error },
-                                        formState,
-                                    }) => (
-                                        <TextField autoFocus
-                                            className={classes.loginSideField}
-                                            margin='dense'
+                            )}
+                        />
+                        <Controller
+                            name="username"
+                            control={control}
+                            render={({
+                                field: { onChange, onBlur, value, name, ref },
+                                fieldState: { invalid, isTouched, isDirty, error },
+                                formState,
+                            }) => (
+                                <TextField autoFocus
+                                    className={classes.loginSideField}
+                                    margin='dense'
 
-                                            label="Логин"
-                                            InputLabelProps={{ shrink: true }}
-                                            variant="filled"
-                                            type="text"
-                                            fullWidth
-                                            error={!!error}
-                                            helperText={error?.message}
-                                            onBlur={onBlur} // notify when input is touched
-                                            onChange={onChange} // send value to hook form
-                                            inputRef={ref}
-                                        />
-                                    )}
+                                    label="Логин"
+                                    InputLabelProps={{ shrink: true }}
+                                    variant="filled"
+                                    type="text"
+                                    fullWidth
+                                    error={!!error}
+                                    helperText={error?.message}
+                                    onBlur={onBlur} // notify when input is touched
+                                    onChange={onChange} // send value to hook form
+                                    inputRef={ref}
                                 />
+                            )}
+                        />
 
-                                <Controller
-                                    name="fullname"
-                                    control={control}
-                                    render={({
-                                        field: { onChange, onBlur, value, name, ref },
-                                        fieldState: { invalid, isTouched, isDirty, error },
-                                        formState,
-                                    }) => (
-                                        <TextField autoFocus
-                                            className={classes.loginSideField}
-                                            margin='dense'
+                        <Controller
+                            name="fullname"
+                            control={control}
+                            render={({
+                                field: { onChange, onBlur, value, name, ref },
+                                fieldState: { invalid, isTouched, isDirty, error },
+                                formState,
+                            }) => (
+                                <TextField autoFocus
+                                    className={classes.loginSideField}
+                                    margin='dense'
 
-                                            label="Имя"
-                                            InputLabelProps={{ shrink: true }}
-                                            variant="filled"
-                                            type="text"
-                                            fullWidth
-                                            error={!!error}
-                                            helperText={error?.message}
-                                            onBlur={onBlur} // notify when input is touched
-                                            onChange={onChange} // send value to hook form
-                                            inputRef={ref}
-                                        />
-                                    )}
+                                    label="Имя"
+                                    InputLabelProps={{ shrink: true }}
+                                    variant="filled"
+                                    type="text"
+                                    fullWidth
+                                    error={!!error}
+                                    helperText={error?.message}
+                                    onBlur={onBlur} // notify when input is touched
+                                    onChange={onChange} // send value to hook form
+                                    inputRef={ref}
                                 />
+                            )}
+                        />
 
-                                <Controller
-                                    name="password"
-                                    control={control}
-                                    render={({
-                                        field: { onChange, onBlur, value, name, ref },
-                                        fieldState: { invalid, isTouched, isDirty, error },
-                                        formState,
-                                    }) => (
-                                        <TextField autoFocus
+                        <Controller
+                            name="password"
+                            control={control}
+                            render={({
+                                field: { onChange, onBlur, value, name, ref },
+                                fieldState: { invalid, isTouched, isDirty, error },
+                                formState,
+                            }) => (
+                                <TextField autoFocus
 
-                                            className={classes.loginSideField}
-                                            margin='dense'
-                                            label="Пароль"
-                                            InputLabelProps={{ shrink: true }}
-                                            variant="filled"
-                                            type="password"
-                                            error={!!error}
-                                            helperText={error?.message}
-                                            fullWidth
-                                            onBlur={onBlur} // notify when input is touched
-                                            onChange={onChange} // send value to hook form
-                                            inputRef={ref}
-                                        />
-                                    )}
+                                    className={classes.loginSideField}
+                                    margin='dense'
+                                    label="Пароль"
+                                    InputLabelProps={{ shrink: true }}
+                                    variant="filled"
+                                    type="password"
+                                    error={!!error}
+                                    helperText={error?.message}
+                                    fullWidth
+                                    onBlur={onBlur} // notify when input is touched
+                                    onChange={onChange} // send value to hook form
+                                    inputRef={ref}
                                 />
-                                <Controller
-                                    name="password2"
-                                    control={control}
-                                    render={({
-                                        field: { onChange, onBlur, value, name, ref },
-                                        fieldState: { invalid, isTouched, isDirty, error },
-                                        formState,
-                                    }) => (
-                                        <TextField autoFocus
+                            )}
+                        />
+                        <Controller
+                            name="password2"
+                            control={control}
+                            render={({
+                                field: { onChange, onBlur, value, name, ref },
+                                fieldState: { invalid, isTouched, isDirty, error },
+                                formState,
+                            }) => (
+                                <TextField autoFocus
 
-                                            className={classes.loginSideField}
-                                            margin='dense'
-                                            label="Подтвердите пароль"
-                                            InputLabelProps={{ shrink: true }}
-                                            variant="filled"
-                                            type="password"
-                                            error={!!error}
-                                            helperText={error?.message}
-                                            fullWidth
-                                            onBlur={onBlur} // notify when input is touched
-                                            onChange={onChange} // send value to hook form
-                                            inputRef={ref}
-                                        />
-                                    )}
+                                    className={classes.loginSideField}
+                                    margin='dense'
+                                    label="Подтвердите пароль"
+                                    InputLabelProps={{ shrink: true }}
+                                    variant="filled"
+                                    type="password"
+                                    error={!!error}
+                                    helperText={error?.message}
+                                    fullWidth
+                                    onBlur={onBlur} // notify when input is touched
+                                    onChange={onChange} // send value to hook form
+                                    inputRef={ref}
                                 />
+                            )}
+                        />
 
 
-                                <Button disabled={loadingStatus === LoadingState.LOADING} type="submit" variant='contained' color="primary" fullWidth>
-                                    Регистрация
-                                </Button>
-                            </FormGroup>
-                        </FormControl>
-                    </form>
-                </ModalBlock>
-            }
-            }
-        </Notification>
+                        <Button disabled={loadingStatus === LoadingState.LOADING} type="submit" variant='contained' color="primary" fullWidth>
+                            Регистрация
+                        </Button>
+                    </FormGroup>
+                </FormControl>
+            </form>
+        </ModalBlock>
 
 
     )
