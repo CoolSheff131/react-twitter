@@ -55,7 +55,7 @@ export const UploadImages: React.FC<UploadImageProps> = ({ onChangeImages, image
                 <ImageOutlined style={{ fontSize: 26 }} />
             </IconButton>
             <input ref={inputRef} type="file" hidden id="upload-input" />
-            <ImageList images={images} removeImage={removeImage} />
+            <ImageList images={images.map(obj => obj.blobUrl)} removeImage={removeImage} />
         </div>
     )
 }

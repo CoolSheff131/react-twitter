@@ -5,8 +5,8 @@ import { useHomeStyles } from '../pages/Home/theme'
 import { ImageObj } from './AddTweetForm'
 
 interface ImageListProps {
-    images: ImageObj[];
-    removeImage: (url: string) => void;
+    images: string[];
+    removeImage?: (url: string) => void;
 }
 
 export const ImageList: React.FC<ImageListProps> = ({ images, removeImage }) => {
@@ -14,11 +14,11 @@ export const ImageList: React.FC<ImageListProps> = ({ images, removeImage }) => 
     return (
         <div className={classes.imagesList}>
             {
-                images.map(obj =>
-                    <div key={obj.blobUrl} className={classes.imagesListItem} style={{ backgroundImage: `url(${obj.blobUrl})` }}>
-                        <IconButton className={classes.imagesListRemove} onClick={(): void => removeImage(obj.blobUrl)} color="primary">
+                images.map(url =>
+                    <div key={url} className={classes.imagesListItem} style={{ backgroundImage: `url(${url})` }}>
+                        {removeImage && <IconButton className={classes.imagesListRemove} onClick={(): void => removeImage(url)} color="primary">
                             <Clear style={{ fontSize: 26 }} />
-                        </IconButton>
+                        </IconButton>}
                     </div>
                 )
             }

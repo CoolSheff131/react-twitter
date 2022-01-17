@@ -10,6 +10,7 @@ import ruLand from 'date-fns/locale/ru'
 import { fetchTweetData, setTweetData } from '../../../store/ducks/tweet/contracts/actionCreator'
 import { selectIsTweetLoading, selectTweetData } from '../../../store/ducks/tweet/selectors'
 import { useHomeStyles } from '../theme'
+import { ImageList } from '../../../components/ImageList'
 
 export const FullTweet: React.FC = (): React.ReactElement | null => {
     const dispatch = useDispatch()
@@ -51,6 +52,7 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
             </div>
             <Typography className={classes.fullTweetText} gutterBottom>
                 {tweetData.text}
+                {tweetData.images && <ImageList images={tweetData.images} />}
             </Typography>
             {/* <div className={classes.tweetFooter}>
                     <div>

@@ -9,12 +9,14 @@ import classNames from 'classnames'
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import { formatDate } from '../utils/formatDate';
 import { MoreVertRounded } from '@material-ui/icons';
+import { ImageList } from './ImageList';
 
 interface TweetProps {
   _id: string;
   text: string;
   classes: ReturnType<typeof useHomeStyles>;
   createdAt: string;
+  images?: string[];
   user: {
     fullname: string;
     username: string;
@@ -22,7 +24,7 @@ interface TweetProps {
   };
 }
 
-export const Tweet: React.FC<TweetProps> = ({ _id, classes, user, text, createdAt }: TweetProps): React.ReactElement => {
+export const Tweet: React.FC<TweetProps> = ({ _id, classes, user, text, createdAt, images }: TweetProps): React.ReactElement => {
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -77,6 +79,7 @@ export const Tweet: React.FC<TweetProps> = ({ _id, classes, user, text, createdA
           </div>
           <Typography variant="body1" gutterBottom>
             {text}
+            {images && <ImageList images={images} />}
           </Typography>
           <div className={classes.tweetFooter}>
             <div>

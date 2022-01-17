@@ -57,7 +57,8 @@ export const Home = (): React.ReactElement => {
                                     return <Tweet
                                         key={tweet._id}
                                         {...tweet}
-                                        classes={classes} />
+                                        classes={classes}
+                                        images={tweet.images} />
                                 })
                             } />
                             <Route path="/home/tweet/:id" element={<FullTweet />} />
