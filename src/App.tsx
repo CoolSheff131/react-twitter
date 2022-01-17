@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Home } from './pages/Home/index';
+import { User } from './pages/User/index';
 import { SignIn } from './pages/SignIn';
 import { fetchUserData } from './store/ducks/user/contracts/actionCreator';
 import { selectIsAuth, selectUserStatus } from './store/ducks/user/selectors';
@@ -30,6 +31,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/signin" element={<SignIn />} ></Route>
+        <Route path="/user" element={<User />}  ></Route>
         <Route path="*" element={<Home />}  ></Route>
       </Routes>
 
