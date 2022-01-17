@@ -10,6 +10,8 @@ import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import { formatDate } from '../utils/formatDate';
 import { MoreVertRounded } from '@material-ui/icons';
 import { ImageList } from './ImageList';
+import { removeTweet } from '../store/ducks/tweets/contracts/actionCreator';
+import { useDispatch } from 'react-redux';
 
 interface TweetProps {
   _id: string;
@@ -25,7 +27,7 @@ interface TweetProps {
 }
 
 export const Tweet: React.FC<TweetProps> = ({ _id, classes, user, text, createdAt, images }: TweetProps): React.ReactElement => {
-
+  const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const navigate = useNavigate()
@@ -40,8 +42,15 @@ export const Tweet: React.FC<TweetProps> = ({ _id, classes, user, text, createdA
     event.stopPropagation()
     setAnchorEl(event.currentTarget)
   }
-  const handleClose = () => {
+  const handleClose = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation()
+    event.preventDefault()
     setAnchorEl(null)
+  }
+
+  const handleRemove = (event: React.MouseEvent<HTMLElement>) => {
+    handleClose(event)
+    dispatch(removeTweet(_id))
   }
 
   return (
@@ -71,7 +80,7 @@ export const Tweet: React.FC<TweetProps> = ({ _id, classes, user, text, createdA
                 <MenuItem>
                   Редактировать
                 </MenuItem>
-                <MenuItem>
+                <MenuItem onClick={handleRemove}>
                   Удалить
                 </MenuItem>
               </Menu>
