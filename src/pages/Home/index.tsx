@@ -17,6 +17,7 @@ import { Route, Routes } from 'react-router-dom'
 import { BackButton } from '../../components/BackButton'
 import { FullTweet } from './components/FullTweet'
 import { Users } from '../../components/Users'
+import { UserSideProfile } from '../../components/UserSideProfile'
 
 export const Home = (): React.ReactElement => {
     const dispatch = useDispatch()
@@ -33,6 +34,7 @@ export const Home = (): React.ReactElement => {
             <Grid container spacing={3}>
                 <Grid sm={1} item md={3}>
                     <SideMenu classes={classes} />
+                    <UserSideProfile />
                 </Grid>
                 <Grid sm={8} item md={6}>
                     <Paper className={classes.tweetsWrapper} variant='outlined'>
