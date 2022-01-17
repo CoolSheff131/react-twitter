@@ -3,6 +3,7 @@ import { Clear, ImageOutlined, RemoveCircle } from '@material-ui/icons'
 import React from 'react'
 import { useHomeStyles } from '../pages/Home/theme'
 import { ImageObj } from './AddTweetForm'
+import { ImageList } from './ImageList'
 
 interface UploadImageProps {
     images: ImageObj[];
@@ -54,17 +55,7 @@ export const UploadImages: React.FC<UploadImageProps> = ({ onChangeImages, image
                 <ImageOutlined style={{ fontSize: 26 }} />
             </IconButton>
             <input ref={inputRef} type="file" hidden id="upload-input" />
-            <div className={classes.imagesList}>
-                {
-                    images.map(obj =>
-                        <div key={obj.blobUrl} className={classes.imagesListItem} style={{ backgroundImage: `url(${obj.blobUrl})` }}>
-                            <IconButton className={classes.imagesListRemove} onClick={(): void => removeImage(obj.blobUrl)} color="primary">
-                                <Clear style={{ fontSize: 26 }} />
-                            </IconButton>
-                        </div>
-                    )
-                }
-            </div>
+            <ImageList images={images} removeImage={removeImage} />
         </div>
     )
 }

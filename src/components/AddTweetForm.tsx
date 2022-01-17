@@ -4,11 +4,12 @@ import React from 'react'
 import { ImageOutlined as ImageOutlinedIcon, PersonAddOutlined, SentimentSatisfiedOutlined as EmojiIcon } from '@material-ui/icons'
 import { useHomeStyles } from '../pages/Home/theme';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTweet, fetchAddTweet } from '../store/ducks/tweets/contracts/actionCreator';
+import { addTweet, fetchAddTweet, setAddFormState } from '../store/ducks/tweets/contracts/actionCreator';
 import { selectAddFormState } from '../store/ducks/tweets/selectors';
 import { AddFormState } from '../store/ducks/tweets/contracts/state';
 import Alert from '@material-ui/lab/Alert'
 import { UploadImages } from './UploadImages';
+import { uploadImage } from '../utils/uploadImage';
 
 interface AddTweetFormProps {
     classes: ReturnType<typeof useHomeStyles>;
@@ -36,9 +37,17 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows = 1
             setText(e.currentTarget.value)
         }
     }
-    const handleClickAddTweet = (): void => {
+    const handleClickAddTweet = async (): Promise<void> => {
         setText('')
-        dispatch(fetchAddTweet(text))
+        dispatch(setAddFormState(AddFormState.LOADING))
+        let urls = []
+        for (let i = 0; i < images.length; i++) {
+            const file = images[i].file
+            const { url } = await uploadImage(file)
+            urls.push(url)
+        }
+        dispatch(fetchAddTweet({ text, images: urls }))
+        setImages([])
     }
 
     return (

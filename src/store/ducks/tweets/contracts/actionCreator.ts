@@ -25,9 +25,9 @@ export type TweetsActions = SetTweetsActionInterface
 | AddTweetActionInterface
 | SetAddFormStateActionInterface
 
-export const fetchAddTweet = (payload: string): FetchAddTweetActionInterface => ({
+export const fetchAddTweet = (payload: {text: string, images: string[]}): FetchAddTweetActionInterface => ({
     type: TweetsActionsType.FETCH_ADD_TWEET,
-    payload,
+    payload
 })
 export const addTweet = (payload: Tweet): AddTweetActionInterface => ({
     type: TweetsActionsType.ADD_TWEET,
